@@ -16,7 +16,7 @@ const theme = createTheme();
 
 export default function ViewArticle() {
   const [article, setArticle] = React.useState({});
-  const [errors, setErrors] = React.useState('');
+  const [errors, setErrors] = React.useState(false);
 
   let { article_id } = useParams();
 
@@ -25,9 +25,9 @@ export default function ViewArticle() {
     try {
       const response = await axios.get(articleUrl);
       setArticle(response.data);
-      setErrors('');
+      setErrors(false);
     } catch (error) {
-      setErrors('error');
+      setErrors(true);
     }
   }, [article_id]);
 
@@ -43,8 +43,8 @@ export default function ViewArticle() {
             alignItems: 'center',
           }}
         >
-          { errors === 'error' &&
-          <MuiAlert elevation={6} variant="filled" severity="error">Error while fetching articles</MuiAlert>}
+          { errors &&
+          <MuiAlert elevation={6} variant="filled" severity="error">Error while fetching article</MuiAlert>}
           <Typography component="h1" variant="h5">
             {article.title}
           </Typography>

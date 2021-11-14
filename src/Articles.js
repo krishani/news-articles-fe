@@ -23,15 +23,15 @@ const theme = createTheme();
 export default function Articles() {
   const navigate = useNavigate();
   const [articles, setArticles] = React.useState([]);
-  const [errors, setErrors] = React.useState('');
+  const [errors, setErrors] = React.useState(false);
 
   React.useEffect( async () => {
     try {
       const response = await axios.get(ARTICLES_URL);
       setArticles(response.data.data);
-      setErrors('');
+      setErrors(false);
     } catch (e) {
-      setErrors('error');
+      setErrors(true);
     }
   }, []);
 
@@ -45,7 +45,7 @@ export default function Articles() {
           </Typography>
         </Toolbar>
       </AppBar>
-      { errors === 'error' &&
+      { errors &&
       <MuiAlert elevation={6} variant="filled" severity="error">Error while fetching articles</MuiAlert>}
       <main>
         <Box
