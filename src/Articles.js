@@ -66,7 +66,7 @@ export default function Articles() {
               News Articles
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              This is the latest movie collection from our application.
+              This is the latest news article collection from our application.
             </Typography>
             <Stack
               sx={{ pt: 4 }}
